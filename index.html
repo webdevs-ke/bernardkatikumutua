@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" ng-app="portfolioApp">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bernard Katiku Mutua — Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Bernard Katiku Mutua — Full stack developer. Projects, skills, contact." />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- AngularJS and ngRoute -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
+  <script src="app.js"></script>
+  <script src="controllers/main.controller.js"></script>
+  <script src="services/projects.service.js"></script>
+</head>
+<body ng-controller="MainCtrl as main">
+  <header class="site-header">
+    <div class="container header-grid">
+      <div class="brand">
+        <img src="assets/images/avatar.jpg" alt="Bernard avatar" class="avatar" />
+        <div>
+          <h1>Bernard Katiku Mutua</h1>
+          <p class="muted">Full Stack Developer — JavaScript • Node • Angular • Unity</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#!/">Home</a>
+        <a href="#!/projects">Projects</a>
+        <a href="#!/about">About</a>
+        <a href="#!/contact">Contact</a>
+        <button class="btn-toggle" ng-click="main.toggleTheme()">
+          {{ main.dark ? 'Light' : 'Dark' }} Mode
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container view">
+    <div ng-view></div>
+  </main>
+
+  <footer class="site-footer container">
+    <small>© {{ main.year }} Bernard Katiku Mutua — Built with AngularJS</small>
+  </footer>
+
+  <!-- Templates -->
+  <script type="text/ng-template" id="home.html">
+    <section class="hero">
+      <h2>Hi — I build web apps & tools that solve real problems.</h2>
+      <p>I’m a full stack developer with experience in JavaScript, Node.js, Angular, and game/dev tools. I focus on clean architecture, performance, and UX.</p>
+      <div class="cta">
+        <a href="#!/projects" class="btn">View Projects</a>
+        <a href="#!/contact" class="btn btn-outline">Hire Me</a>
+      </div>
+
+      <div class="skills">
+        <h3>Key skills</h3>
+        <ul>
+          <li>Frontend: AngularJS, React, HTML5, CSS3, TypeScript</li>
+          <li>Backend: Node.js, Express, REST APIs, MongoDB</li>
+          <li>Other: Unit testing, CI/CD, Docker, Unity (game dev)</li>
+        </ul>
+      </div>
+    </section>
+  </script>
+
+  <script type="text/ng-template" id="projects.html">
+    <section>
+      <h2>Selected Projects</h2>
+      <div class="grid projects-grid">
+        <article class="card" ng-repeat="p in main.projects">
+          <a href="#!/projects/{{p.id}}">
+            <img ng-src="{{p.image || 'assets/images/project-placeholder.png'}}" alt="{{p.title}} screenshot" />
+          </a>
+          <div class="card-body">
+            <h3><a href="#!/projects/{{p.id}}">{{p.title}}</a>{{p.title}}</h3>
+            <p class="muted">{{p.short}}</p>
+            <p class="tags"><span ng-repeat="t in p.tags" class="tag">{{t}}</span></p>
+            <div class="card-actions">
+              <a ng-href="{{p.live}}" target="_blank" ng-if="p.live" class="btn small">Live</a>
+              <a ng-href="{{p.repo}}" target="_blank" ng-if="p.repo" class="btn small btn-outline">Repo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </script>
+
+  <script type="text/ng-template" id="about.html">
+    <section>
+      <h2>About Me</h2>
+      <p>I build scalable web applications and developer tools. I enjoy improving developer experience, automations, and building UIs that feel fast and predictable.</p>
+      <h3>Education & Certifications</h3>
+      <ul>
+        <li>BSc Computer Science (or your degree)</li>
+        <li>Certs: (Add relevant certs: e.g., AWS, Google)</li>
+      </ul>
+
+      <h3>How I work</h3>
+      <p>Test-driven approach, small iterative releases, and close collaboration with designers and product owners.</p>
+    </section>
+  </script>
+
+  <script type="text/ng-template" id="contact.html">
+    <section>
+      <h2>Contact</h2>
+      <p>Interested in working together? Email me at <a href="mailto:you@example.com">you@example.com</a> or use this quick form:</p>
+      <form name="contactForm" ng-submit="main.sendContact(contactForm)" novalidate>
+        <label>
+          Name
+          <input type="text" name="name" ng-model="main.contact.name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" ng-model="main.contact.email" required />
+        </label>
+        <label>
+          Message
+          <textarea name="message" ng-model="main.contact.message" required></textarea>
+        </label>
+        <button class="btn" type="submit" ng-disabled="contactForm.$invalid">Send</button>
+        <span class="muted" ng-if="main.contactSent">Thanks — message sent!</span>
+      </form>
+    </section>
+  </script>
+  <script type="text/ng-template" id="project-detail.html">
+    <section class="project-detail" ng-if="proj">
+      <a href="#!/projects" class="back-link">← Back to Projects</a>
+      <h2>{{ proj.title }}</h2>
+      <img ng-src="{{ proj.image || 'assets/images/project-placeholder.png' }}" alt="{{ proj.title }}" class="detail-image" />
+  
+      <p class="muted">{{ proj.short }}</p>
+  
+      <h3>Overview</h3>
+      <p>{{ proj.description }}</p>
+  
+      <h3>Technologies</h3>
+      <p class="tags">
+        <span class="tag" ng-repeat="t in proj.tags">{{ t }}</span>
+      </p>
+  
+      <h3>Links</h3>
+      <p>
+        <a ng-href="{{ proj.live }}" target="_blank" ng-if="proj.live" class="btn small">Live Demo</a>
+        <a ng-href="{{ proj.repo }}" target="_blank" ng-if="proj.repo" class="btn small btn-outline">View Code</a>
+      </p>
+    </section>
+  
+    <section ng-if="!proj">
+      <p>Project not found. <a href="#!/projects">Return to projects</a>.</p>
+    </section>
+  </script>
+  
+</body>
+</html>
