@@ -21,20 +21,58 @@ body{
   background:var(--bg);
   color:var(--text);
   line-height:1.5;
+  padding-top: 150px; /* match the header height */
 }
 
 .container{ max-width:1100px; margin:0 auto; padding:1rem; }
 
-.site-header{ border-bottom:1px solid rgba(0,0,0,0.06); background:var(--card); }
+.site-header {
+  position: fixed;          /* makes it float on top */
+  top: 0;                   /* stick to the top edge */
+  left: 0;
+  width: 100%;              /* full width */
+  background:var(--card); /* subtle transparency */
+  z-index: 1000;            /* ensure it stays above content */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px); /* adds a modern frosted-glass effect */
+}
+
+/* style your nav links */
+.site-header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.site-header ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.site-header a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.site-header a:hover {
+  color: #00bcd4;
+}
+
 .header-grid{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 0; }
 .brand{ display:flex; gap:0.75rem; align-items:center;}
 .avatar{ width:56px; height:56px; border-radius:8px; object-fit:cover; }
 
 .nav a{ margin-right:0.75rem; text-decoration:none; color:var(--text); }
-.nav .btn-toggle{ border:1px solid rgba(0,0,0,0.06); background:transparent; padding:0.4rem 0.6rem; border-radius:6px; cursor:pointer; }
+.nav .btn-toggle{ border:1px solid rgba(34, 32, 32, 0.06); background:#ffd700; padding:0.4rem 0.6rem; border-radius:6px; cursor:pointer; }
 
 .hero{ padding:2rem 0; }
 .hero h2{ margin:0 0 .5rem; font-size:1.6rem; }
+.hero p{ width: 70%; padding-bottom: 10px; }
 .cta .btn{ margin-right:1rem; padding:0.6rem 1rem; border-radius:8px; text-decoration:none; background:var(--accent); color:white;}
 .btn-outline{ border:1px solid var(--accent); background:transparent; color:var(--text); padding:0.5rem 0.9rem; }
 
