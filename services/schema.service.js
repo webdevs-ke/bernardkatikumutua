@@ -19,13 +19,13 @@
               "@type": "Person",
               "name": "Bernard Katiku Mutua",
               "jobTitle": "Full Stack Developer",
-              "url": "https://yourdomain.com",
+              "url": "https://bernardkatikumutua.netlify.app",
               "sameAs": [
-                "https://github.com/yourusername",
-                "https://www.linkedin.com/in/yourusername/"
+                "https://github.com/webdevs-ke",
+                "https://www.linkedin.com/in/katiku-mutua/"
               ],
               "knowsAbout": [
-                "AngularJS", "Node.js", "JavaScript", "Unity", "Computer Vision", "AI Training Data"
+                "AngularJS", "Node.js", "JavaScript", "Unity", "Computer Vision", "AI Training Data", "PHP", "SQL", "Python"
               ],
               "description": "Full Stack Developer experienced in Angular, Node.js, and AI-based applications."
             };

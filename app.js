@@ -1,5 +1,6 @@
 (function(){
   var ng = angular.module('portfolioApp', ['ngRoute']);
+
     ng.directive('autoHideHeader', function() {
       return {
         restrict: 'A',
@@ -7,7 +8,7 @@
           let lastScroll = 0;
           window.addEventListener('scroll', () => {
             let current = window.scrollY;
-            if (current > lastScroll && current > 100) {
+            if (current > lastScroll && current > 150) {
               element.addClass('hide');
             } else {
               element.removeClass('hide');
@@ -17,7 +18,7 @@
         }
       };
     });
-    
+
     ng.config(['$routeProvider', function($routeProvider){
       $routeProvider
         .when('/', { templateUrl: 'home.html' })

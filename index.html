@@ -5,13 +5,29 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bernard Katiku Mutua — Full Stack Developer</title>
   <meta name="description" content="Portfolio of Bernard Katiku Mutua — Full stack developer. Projects, skills, contact." />
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bernard Katiku Mutua Portfolio">
+  <meta property="og:title" content="Bernard Katiku Mutua | Full Stack Developer">
+  <meta property="og:description" content="Portfolio of Bernard Katiku Mutua — Full Stack Developer skilled in Angular, Node.js, and modern web tools.">
+  <meta property="og:image" content="assets/images/avatar.png">
+  <meta property="og:url" content="https://bernardkatikumutua.netlify.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bernard Katiku Mutua | Full Stack Developer">
+  <meta name="twitter:description" content="Building scalable apps, tools, and video games.">
+  <meta name="twitter:image" content="assets/images/avatar.png">
+
   <link rel="stylesheet" href="styles.css" />
   <!-- AngularJS and ngRoute -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
   <script src="app.js"></script>
+  <script src="services/seo.service.js"></script>
   <script src="controllers/main.controller.js"></script>
+  <script src="controllers/project-detail.controller.js"></script>
   <script src="services/projects.service.js"></script>
+  <script src="services/schema.service.js"></script>
+  
 </head>
 <body ng-controller="MainCtrl as main">
   <header class="site-header" auto-hide-header>
@@ -36,8 +52,7 @@
         </ul>
         <button id="themeToggle" class="btn-toggle" ng-click="main.toggleTheme()" aria-label="Toggle dark mode">
           <span class="icon moon">🌙</span>
-          <span class="icon sun">☀️</span>
-          
+          <span class="icon sun">☀️</span>          
         </button>
       </nav>
     </div>
@@ -121,19 +136,19 @@
   <script type="text/ng-template" id="contact.html">
     <section>
       <h2>Contact</h2>
-      <p>Interested in working together? Email me at <a href="mailto:you@example.com">you@example.com</a> or use this quick form:</p>
-      <form name="contactForm" ng-submit="main.sendContact(contactForm)" novalidate>
+      <p>Interested in working together? <strong>Email me</strong> at <a href="mailto:katikumut@gmail.com">katikumut@gmail.com</a> or use this quick form:</p>
+      <form class="contact-form" name="contactForm" ng-submit="main.sendContact(contactForm)" novalidate>
         <label>
           Name
-          <input type="text" name="name" ng-model="main.contact.name" required />
+          <input type="text" name="name" ng-model="main.contact.name" placeholder="John Doe" required />
         </label>
         <label>
           Email
-          <input type="email" name="email" ng-model="main.contact.email" required />
+          <input type="email" name="email" ng-model="main.contact.email" placeholder="john@doe.com" required />
         </label>
         <label>
           Message
-          <textarea name="message" ng-model="main.contact.message" required></textarea>
+          <textarea name="message" ng-model="main.contact.message" placeholder="Type your message here" required></textarea>
         </label>
         <button class="btn" type="submit" ng-disabled="contactForm.$invalid">Send</button>
         <span class="muted" ng-if="main.contactSent">Thanks — message sent!</span>
@@ -177,7 +192,7 @@
         menuBtn.addEventListener('click', () => {
           const isOpen = navLinks.classList.toggle('show');
           navLinks.querySelectorAll('a').forEach(link => {
-            link.style.color = isOpen ? '#00bcd4' : '#fff';
+            link.style.color = isOpen ? '#00bcd4' : '#000';
           });
         });
   
@@ -223,6 +238,9 @@
   })();
 </script>
 
+<button class="back-to-top" ng-click="scrollToTop()" aria-label="Back to top">
+  <img src="assets/icons/up-arrow.svg" alt="Back to top icon" />
+</button>
 
 </body>
 </html>

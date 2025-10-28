@@ -10,7 +10,7 @@
                 tags: ['AngularJS', 'Node.js', 'MongoDB'],
                 repo: 'https://github.com/yourname/buildtrack',
                 live: '',
-                image: 'assets/images/buildtrack.png'
+                image: 'assets/images/jomcon.png'
               },
               {
                 id: 2,

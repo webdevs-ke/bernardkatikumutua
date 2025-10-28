@@ -7,14 +7,15 @@
 }
 
 .theme-dark{
-  --bg: #0b1220;
+  --bg: #0c2229;
   --text: #e6eef6;
   --muted: #9aa7b6;
   --accent: #22c1c3;
-  --card: #07121a;
+  --card: #0c2229;
 }
 
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -23,6 +24,26 @@ body{
   line-height:1.5;
   padding-top: 150px; /* match the header height */
  
+}
+
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+a:link {
+  color: #0ea5a4; /* Unvisited link */
+}
+a:visited {
+  color: purple; /* Visited link */
+}
+a:hover {
+  text-decoration: underline; /* Re-add underline on hover */
+  color: #c59607; /* Link on hover */
+}
+a:active {
+  color: #836407; /* Link when clicked */
 }
 
 .container{ max-width:1100px; margin:0 auto; padding:1rem; }
@@ -261,4 +282,73 @@ textarea{ min-height:120px; resize:vertical; }
   margin-bottom:1rem;
   text-decoration:none;
   color:var(--accent);
+}
+
+.contact-form {
+  border: 1px solid #c59607; 
+  border-radius: 10px; /* Adjust the value for desired roundness */
+  padding: 20px; /* For better visual spacing */
+}
+
+.contact-form input[type="text"] {
+  border: 1px solid rgba(0, 188, 212, 0.7); 
+  border-radius: 5px; /* Adjust the value for desired roundness */
+  padding: 8px; /* For better visual spacing */
+}
+
+.contact-form input[type="email"] {
+  border: 1px solid rgba(3, 122, 138, 0.7); 
+  border-radius: 5px; /* Adjust the value for desired roundness */
+  padding: 8px; /* For better visual spacing */
+}
+
+.contact-form textarea {
+  border: 1px solid rgba(1, 69, 78, 0.7); 
+  border-radius: 3px; /* Adjust the value for desired roundness */
+  padding: 8px; /* For better visual spacing */
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #00bcd4, #ffd700);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+  z-index: 1500;
+}
+
+/* Visible state */
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.back-to-top:hover img {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 6px rgba(218, 165, 32, 0.8));
+}
+
+/* Dark mode */
+body.dark-mode .back-to-top {
+  background: linear-gradient(to right, #4fc3f7, #ffc107);
+  color: #111;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
