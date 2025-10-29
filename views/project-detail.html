@@ -1,0 +1,36 @@
+<section class="project-details" ng-if="vm.project">
+    <button class="back-btn" ng-click="vm.goBack()">← Back to Projects</button>
+  
+    <div class="project-hero">
+      <img ng-src="{{vm.project.image}}" alt="{{vm.project.title}}" class="project-image">
+      <div class="project-header">
+        <h2 class="project-title">{{vm.project.title}}</h2>
+        <p class="project-category"><blockquote class="project-short">{{vm.project.short}}</blockquote></p>
+      </div>
+    </div>
+  
+    <div class="project-body">
+      <p class="project-description">{{vm.project.description}}</p>
+  
+      <h4>Tech Stack</h4>
+      <ul class="tech-list">
+        <li ng-repeat="tech in vm.project.tags">{{tech}}</li>
+      </ul>
+      <br>
+      <div class="project-links">
+        <a ng-if="vm.project.live" ng-href="{{vm.project.live}}" target="_blank" class="btn demo-btn">
+          🔗 Live Demo
+        </a>
+        <a ng-if="vm.project.repo" ng-href="{{vm.project.repo}}" target="_blank" class="btn code-btn">
+          💻 View Code
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <section ng-if="!vm.project" class="not-found">
+    <h3>Project Not Found</h3>
+    <p>The project you're looking for doesn't exist or was removed.</p>
+    <a href="#/projects" class="btn">Back to Projects</a>
+  </section>
+  

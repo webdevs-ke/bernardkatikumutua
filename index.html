@@ -19,11 +19,16 @@
 
   <link rel="stylesheet" href="styles.css" />
   <!-- AngularJS and ngRoute -->
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+
   <script src="app.js"></script>
+  
   <script src="services/seo.service.js"></script>
   <script src="controllers/main.controller.js"></script>
+  <script src="controllers/binary-canvas.controller.js"></script>
   <script src="controllers/project-detail.controller.js"></script>
   <script src="services/projects.service.js"></script>
   <script src="services/schema.service.js"></script>
@@ -35,7 +40,7 @@
       <div class="brand">
         <img src="assets/images/avatar.jpg" alt="Bernard avatar" class="avatar" />
         <div>
-          <h1>Bernard Katiku Mutua</h1>
+          <h1>Ben K. M.</h1>
           <p class="muted">Full Stack Developer — JavaScript • Node • Angular • Python • PHP • SQL</p>
         </div>
       </div>
@@ -45,10 +50,10 @@
           ☰
         </button>
         <ul class="nav-links" id="navLinks">
-          <li><a href="#!/">Home</a></li>
-          <li><a href="#!/projects">Projects</a></li>
-          <li><a href="#!/about">About</a></li>
-          <li><a href="#!/contact">Contact</a></li>
+          <li><a href="#!/" ng-class="{ active: isActive('/') }">Home</a></li>
+          <li><a href="#!/projects" ng-class="{ active: isActive('/projects') }">Projects</a></li>
+          <li><a href="#!/about" ng-class="{ active: isActive('/about') }">About</a></li>
+          <li><a href="#!/contact" ng-class="{ active: isActive('/contact') }">Contact</a></li>
         </ul>
         <button id="themeToggle" class="btn-toggle" ng-click="main.toggleTheme()" aria-label="Toggle dark mode">
           <span class="icon moon">🌙</span>
@@ -65,35 +70,180 @@
   </main>
 
   <footer class="site-footer container">
-    <small>© {{ main.year }} Bernard Katiku Mutua — Built with AngularJS</small>
+    <div class="social-links">
+      <a href="https://github.com/webdevs-ke" target="_blank" rel="noopener" aria-label="GitHub">
+        <img src="assets/icons/github.svg" alt="GitHub" />
+      </a>
+      <a href="https://www.linkedin.com/in/katiku-mutua" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="assets/icons/linkedin.svg" alt="LinkedIn" />
+      </a>
+      <a href="https://x.com/KatikuMutu90383" target="_blank" rel="noopener" aria-label="X">
+        <img src="assets/icons/x.svg" alt="X" />
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61571822998379" target="_blank" rel="noopener" aria-label="Facebook">
+        <img src="assets/icons/facebook.svg" alt="Facebook" />
+      </a>
+      <a href="https://www.youtube.com/@webdevs_ke6591" target="_blank" rel="noopener" aria-label="YouTube">
+        <img src="assets/icons/youtube.svg" alt="YouTube" />
+      </a>
+    </div>
+    <small>© {{ main.year }} Ben Katiku Mutua — Built with AngularJS & HTML5</small>
   </footer>
 
   <!-- Templates -->
   <script type="text/ng-template" id="home.html">
-    <section class="hero">
-      <h2>Hi — I build web apps & tools that solve real-world problems</h2>
-      <p>I'm a versatile <em>Full Stack Developer</em> with expertise in <strong>JavaScript, Node.js, Angular, Python, PHP, and SQL</strong>. I design and develop scalable, high-performance web applications that combine sleek, responsive front-end interfaces with efficient, secure back-end systems. I am passionate about clean code and problem-solving, leveraging modern frameworks, RESTful APIs, and database technologies to create innovative digital solutions that deliver <strong>seamless user experiences and real-world impact</strong>.
-      </p>
-      <p>I'm a versatile <em>Full Stack Developer</em> with expertise in <strong>JavaScript, Node.js, Angular, Python, PHP, and SQL</strong>. I design and develop scalable, high-performance web applications that combine sleek, responsive front-end interfaces with efficient, secure back-end systems. I am passionate about clean code and problem-solving, leveraging modern frameworks, RESTful APIs, and database technologies to create innovative digital solutions that deliver <strong>seamless user experiences and real-world impact</strong>.
-      </p>
-      <p>I'm a versatile <em>Full Stack Developer</em> with expertise in <strong>JavaScript, Node.js, Angular, Python, PHP, and SQL</strong>. I design and develop scalable, high-performance web applications that combine sleek, responsive front-end interfaces with efficient, secure back-end systems. I am passionate about clean code and problem-solving, leveraging modern frameworks, RESTful APIs, and database technologies to create innovative digital solutions that deliver <strong>seamless user experiences and real-world impact</strong>.
-      </p>
-      <p>I'm a versatile <em>Full Stack Developer</em> with expertise in <strong>JavaScript, Node.js, Angular, Python, PHP, and SQL</strong>. I design and develop scalable, high-performance web applications that combine sleek, responsive front-end interfaces with efficient, secure back-end systems. I am passionate about clean code and problem-solving, leveraging modern frameworks, RESTful APIs, and database technologies to create innovative digital solutions that deliver <strong>seamless user experiences and real-world impact</strong>.
-      </p>
-      <div class="cta">
-        <a href="#!/projects" class="btn">View Projects</a>
-        <a href="#!/contact" class="btn btn-outline">Hire Me</a>
-      </div>
-      <br>
-      <div class="skills">
-        <h3>Key skills</h3>
-        <ul>
-          <li>Frontend: AngularJS, React, HTML5, CSS3, TypeScript</li>
-          <li>Backend: Node.js, Express, REST APIs, MongoDB</li>
-          <li>Other: Unit testing, CI/CD, Docker, Unity (game dev)</li>
-        </ul>
+    <section id="hero" class="hero-section container">
+      <div class="hero-content">
+        <h2>Hi — I build web apps & tools that solve real-world problems</h2>
+        <p>I'm a versatile <em>Full Stack Developer</em> with expertise in <strong>JavaScript, Node.js, Angular, Python, PHP, and SQL</strong>. I design and develop scalable, high-performance web applications that combine sleek, responsive front-end interfaces with efficient, secure back-end systems. I am passionate about clean code and problem-solving, leveraging modern frameworks, RESTful APIs, and database technologies to create innovative digital solutions that deliver <strong>seamless user experiences and real-world impact</strong>.
+        </p>
+        <div class="cta">
+          <a href="#!/projects" class="btn">View Projects</a>
+          <a href="#!/contact" class="btn btn-outline">Hire Me</a>
+        </div>
+        <br>
+        <div class="skills">
+          <h3>Key skills</h3>
+          <ul>
+            <li>Frontend: Angular, React, HTML5, CSS3, TypeScript</li>
+            <li>Backend: Node.js, Express, REST APIs, Python, PHP, MongoDB</li>
+            <li>Others: Unit testing, CI/CD, Docker, Unity, Blender, Adobe</li>
+          </ul>
+          <br>
+          <p style="font-size: 14px;">"🧠 The HTML5 <code>&lt;Canvas&gt;Element&lt;/Canvas&gt;</code> is a JavaScript-Programmable Bitmap Image. <blockquote> 🎨 🎬 <strong>The Matrix: </strong>Decorations - Animation </blockquote> of colorful binary rain is a demonsration of that fact 😎"</p>
+        </div>
+      </div>      
+      
+      <!-- Canvas Container on the Right -->
+      <div class="hero-canvas">
+        <canvas id="heroCanvas" width="400" height="400" hero-canvas></canvas>
+        
       </div>
     </section>
+    <hr>
+    <section id="project-categories" class="projects-section container" fade-in-on-scroll>
+      <h3 class="section-title">Project Types I Build</h3>
+    
+      <!-- Web Applications -->
+      <article class="category">
+        <h4 class="category-title">🧭 Web Applications</h4>
+        <ul class="category-list">
+          <li>
+            <strong>Portfolio Website</strong> – Personal or client showcase site with blog and projects.
+          </li>
+          <li>
+            <strong>E-commerce Platform</strong> – Product listings, carts, payments, and user accounts.
+          </li>
+          <li>
+            <strong>Content Management System (CMS)</strong> – Custom admin panels for blogs or websites.
+          </li>
+          <li>
+            <strong>Booking or Reservation System</strong> – For hotels, events, or appointments.
+          </li>
+          <li>
+            <strong>Learning Management System (LMS)</strong> – Courses, quizzes, and student dashboards.
+          </li>
+          <li>
+            <strong>Customer Relationship Management (CRM)</strong> – Track clients, tasks, and sales.
+          </li>
+          <li>
+            <strong>Project Management Tool</strong> – Kanban boards, team chat, task progress tracking.
+          </li>
+        </ul>
+      </article>
+    
+      <!-- API & Backend Projects -->
+      <article class="category">
+        <h4 class="category-title">⚙️ API &amp; Backend Projects</h4>
+        <ul class="category-list">
+          <li>
+            <strong>RESTful or GraphQL API Development</strong> – Data services for mobile or web apps.
+          </li>
+          <li>
+            <strong>Authentication &amp; Authorization System</strong> – Secure login, JWT, role-based access.
+          </li>
+          <li>
+            <strong>Microservices Architecture Project</strong> – Modular scalable backend system.
+          </li>
+          <li>
+            <strong>Payment Gateway Integration</strong> – Stripe, PayPal, or mobile money APIs.
+          </li>
+          <li>
+            <strong>Data Analytics Dashboard</strong> – Aggregate and visualize real-time metrics.
+          </li>
+        </ul>
+      </article>
+    
+      <!-- Front-End Focused -->
+      <article class="category">
+        <h4 class="category-title">💻 Front-End Focused</h4>
+        <ul class="category-list">
+          <li>
+            <strong>Single Page Applications (SPA)</strong> – Angular, React, or Vue-based apps.
+          </li>
+          <li>
+            <strong>Progressive Web Apps (PWA)</strong> – Offline-first responsive web experiences.
+          </li>
+          <li>
+            <strong>Dashboard UI for Admin Systems</strong> – Charts, tables, and filters with Angular or React.
+          </li>
+        </ul>
+      </article>
+    
+      <!-- Cross-Platform or Mobile -->
+      <!-- <article class="category">
+        <h4 class="category-title">📱 Cross-Platform or Mobile</h4>
+        <ul class="category-list">
+          <li>
+            <strong>Hybrid Mobile App</strong> – Using Ionic, React Native, or Flutter.
+          </li>
+          <li>
+            <strong>Chat Application</strong> – Real-time messaging with Socket.io or Firebase.
+          </li>
+          <li>
+            <strong>Social Media Platform</strong> – User feeds, comments, and notifications.
+          </li>
+        </ul>
+      </article> -->
+    
+      <!-- Advanced / AI-Integrated -->
+      <!-- <article class="category">
+        <h4 class="category-title">🧠 Advanced / AI-Integrated</h4>
+        <ul class="category-list">
+          <li>
+            <strong>AI-Powered Recommendation System</strong> – Product or content suggestions.
+          </li>
+          <li>
+            <strong>Computer Vision Dashboard</strong> – Integrate image labeling or object detection results.
+          </li>
+          <li>
+            <strong>Chatbot or Virtual Assistant</strong> – Integrate OpenAI, Dialogflow, or custom NLP models.
+          </li>
+        </ul>
+      </article> -->
+    
+      <!-- DevOps / Deployment Projects -->
+      <article class="category">
+        <h4 class="category-title">☁️ DevOps / Deployment Projects</h4>
+        <ul class="category-list">
+          <li>
+            <strong>Dockerized App Deployment</strong> – Build containerized environments.
+          </li>
+          <li>
+            <strong>CI/CD Pipeline Setup</strong> – GitHub Actions, Jenkins, or GitLab CI integration.
+          </li>
+          <li>
+            <strong>Cloud Hosting and Scaling</strong> – AWS, Azure, Google Cloud, or DigitalOcean setups.
+          </li>
+        </ul>
+      </article>
+      <br><br>
+      <div class="cta" style="margin-left: 100px;">
+        <a href="tel:254708793131" class="btn">REQUEST A PORTFOLIO WEBSITE - LIKE THIS ONE</a>OR&nbsp;&nbsp;&nbsp;
+        <a href="mailto:katikumut@gmail.com" class="btn">SEND ME AN EMAIL FOR ANY OTHER ASSISTANCE</a>
+      </div>
+    </section>
+    
   </script>
 
   <script type="text/ng-template" id="projects.html">
@@ -105,7 +255,7 @@
             <img ng-src="{{p.image || 'assets/images/project-placeholder.png'}}" alt="{{p.title}} screenshot" />
           </a>
           <div class="card-body">
-            <h3><a href="#!/projects/{{p.id}}">{{p.title}}</a>{{p.title}}</h3>
+            <h3><a href="#!/projects/{{p.id}}">{{p.title}}</a></h3>
             <p class="muted">{{p.short}}</p>
             <p class="tags"><span ng-repeat="t in p.tags" class="tag">{{t}}</span></p>
             <div class="card-actions">
@@ -121,22 +271,26 @@
   <script type="text/ng-template" id="about.html">
     <section>
       <h2>About Me</h2>
-      <p>I build scalable web applications and developer tools. I enjoy improving developer experience, automations, and building UIs that feel fast and predictable.</p>
+      <p>I am a passionate Full Stack Developer focused on building scalable web applications and developer tools that enhance both performance and usability. I thrive on improving the developer experience through efficient workflows, automation, and clean, maintainable code. My approach blends creativity with precision — designing user interfaces that feel fast, intuitive, and predictable, while ensuring robust backend systems that scale effortlessly. I also enjoy turning complex problems into seamless, impactful digital experiences.</p>
       <h3>Education & Certifications</h3>
       <ul>
-        <li>BSc Computer Science (or your degree)</li>
-        <li>Certs: (Add relevant certs: e.g., AWS, Google)</li>
+        <li>BSc Computer Science - University of Nairobi</li>
+        <li>Certs: Full-Stack Developer - freeCodeCamp</li>
       </ul>
 
       <h3>How I work</h3>
-      <p>Test-driven approach, small iterative releases, and close collaboration with designers and product owners.</p>
+      <p>My development process is built around a <strong>test-driven approach</strong>, where each feature is validated through clear, automated tests to ensure stability and long-term maintainability. By writing tests first, I can confidently refactor code and deliver robust, high-quality solutions. This discipline helps prevent regressions, encourages clean architecture, and keeps projects adaptable to new features or technologies without sacrificing reliability.<br><br>
+
+        I also believe in <strong>small, iterative releases</strong> that promote agility and continuous improvement. Delivering in smaller cycles allows for quick feedback loops and better alignment with product goals. Collaboration is key — I work closely with <strong>designers and product owners</strong> to translate ideas into practical, user-focused experiences, ensuring that every release reflects both technical excellence and a strong understanding of user needs.
+        
+      </p>
     </section>
   </script>
 
   <script type="text/ng-template" id="contact.html">
     <section>
       <h2>Contact</h2>
-      <p>Interested in working together? <strong>Email me</strong> at <a href="mailto:katikumut@gmail.com">katikumut@gmail.com</a> or use this quick form:</p>
+      <p>Interested in working together? <strong>Email me</strong> at <a href="mailto:katikumut@gmail.com">katikumut@gmail.com</a> or <a href="tel:+254708793131">call +254 708 793 131</a> or use this quick form:</p>
       <form class="contact-form" name="contactForm" ng-submit="main.sendContact(contactForm)" novalidate>
         <label>
           Name
@@ -155,6 +309,7 @@
       </form>
     </section>
   </script>
+
   <script type="text/ng-template" id="project-detail.html">
     <section class="project-detail" ng-if="proj">
       <a href="#!/projects" class="back-link">← Back to Projects</a>
@@ -220,27 +375,18 @@
   })();
 </script>
 
-<script>
-  (function(){
-    const toggleBtn = document.getElementById('themeToggle');
-
-    // Apply stored theme on load
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('theme',
-        document.body.classList.contains('dark-mode') ? 'dark' : 'light'
-      );
-    });
-  })();
-</script>
-
-<button class="back-to-top" ng-click="scrollToTop()" aria-label="Back to top">
-  <img src="assets/icons/up-arrow.svg" alt="Back to top icon" />
+<button id="backToTop" class="back-to-top" ng-click="main.scrollToTop()">
+  <img src="assets/icons/up-arrow.svg" alt="Back to top" />
 </button>
+
+<!-- WhatsApp Chat Button -->
+<a href="https://wa.me/254708793131" 
+   class="whatsapp-float" 
+   target="_blank" 
+   rel="noopener" 
+   aria-label="Chat on WhatsApp">
+  <img src="assets/icons/whatsapp-icon.svg" alt="WhatsApp Chat" />
+</a>
 
 </body>
 </html>

@@ -3,9 +3,6 @@
       .controller('MainCtrl', ['$window', 'ProjectsService', 'SeoService', 'SchemaService', function($window, ProjectsService, SeoService, SchemaService){
         var vm = this;
 
-        const body = angular.element(document.body);
-        const btn = angular.element(document.getElementById('backToTop'));
-
         // Default SEO when landing on home
         SeoDefaults();
         function SeoDefaults(){
@@ -14,27 +11,10 @@
             if(meta) meta.setAttribute('content', 'Portfolio of Bernard Katiku Mutua — Full Stack Developer skilled in Angular, Node.js, and modern web development.');
         }
 
-        
         vm.year = new Date().getFullYear();
         vm.projects = ProjectsService.getAll();
         vm.contact = {};
         vm.contactSent = false;
-  
-        angular.element($window).on('scroll', function() {
-            if ($window.scrollY > 300) {
-              btn.addClass('show');
-            } else {
-              btn.removeClass('show');
-            }
-          });
-        
-        // Scroll smoothly to top
-        vm.scrollToTop = function() {
-        $window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        };
         
         // Theme toggle using localStorage
         vm.dark = ($window.localStorage.getItem('theme') === 'dark');
@@ -64,7 +44,31 @@
           form.$setPristine();
           form.$setUntouched();
         };
-        SchemaService.setPersonSchema();
+
+        SchemaService.setPersonSchema();       
+        
+        // Show WhatsApp/BackToTop button when user scrolls down 200px
+        angular.element($window).on('scroll', function() {
+            const scrollTop = $window.pageYOffset || document.documentElement.scrollTop;
+            const whatsappBtn = document.querySelector('.whatsapp-float');
+            const backTopBtn = document.querySelector('.back-to-top');
+
+            if (scrollTop > 200) {
+                backTopBtn.classList.add('show');
+                whatsappBtn.classList.add('show');
+            } else {
+                backTopBtn.classList.remove('show');
+                whatsappBtn.classList.remove('show');
+            }
+        });  
+
+        // Smooth scroll to top when clicked
+        vm.scrollToTop = function(){
+            $window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          };
       }]);
   })();
   

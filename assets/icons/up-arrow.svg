@@ -1,5 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#DAA520" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="12" cy="12" r="10" stroke="#DAA520" stroke-width="2"/>
-  <path d="M8 12l4-4 4 4"/>
-  <path d="M12 16V8"/>
+<!-- Save as: assets/icons/up-arrow-accent.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gAccent" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#00bcd4"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+  </defs>
+
+  <!-- circular gradient background -->
+  <circle cx="24" cy="24" r="22" fill="url(#gAccent)" />
+
+  <!-- arrow (white for contrast) -->
+  <path d="M16 26 L24 18 L32 26" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 30 V18" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
