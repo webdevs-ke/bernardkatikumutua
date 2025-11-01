@@ -251,6 +251,8 @@ body.dark-mode #scrollProgress {
   transform: rotate(0deg) scale(1);
 }
 
+
+
 .btn-toggle .moon {
   opacity: 0;
   transform: rotate(-180deg) scale(0.5);
