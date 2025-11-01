@@ -17,9 +17,9 @@
             const schema = {
               "@context": "https://schema.org",
               "@type": "Person",
-              "name": "Bernard Katiku Mutua",
+              "name": "Katiku Mutua",
               "jobTitle": "Full Stack Developer",
-              "url": "https://bernardkatikumutua.netlify.app",
+              "url": "https://benkatiku.netlify.app",
               "sameAs": [
                 "https://github.com/webdevs-ke",
                 "https://www.linkedin.com/in/katiku-mutua/"
@@ -27,7 +27,7 @@
               "knowsAbout": [
                 "AngularJS", "Node.js", "JavaScript", "Unity", "Computer Vision", "AI Training Data", "PHP", "SQL", "Python"
               ],
-              "description": "Full Stack Developer experienced in Angular, Node.js, and AI-based applications."
+              "description": "Full Stack Developer experienced in Angular, Node.js, PHP, SQL and AI-based applications."
             };
             addSchema(schema);
           },
@@ -41,10 +41,10 @@
               "url": url,
               "author": {
                 "@type": "Person",
-                "name": "Bernard Katiku Mutua"
+                "name": "Katiku Mutua"
               },
               "programmingLanguage": proj.tags ? proj.tags.join(', ') : 'JavaScript',
-              "image": proj.image || "https://yourdomain.com/assets/images/project-placeholder.png"
+              "image": proj.image || "https://benkatiku.netlify.app/assets/images/project-placeholder.png"
             };
             addSchema(schema);
           },
@@ -53,12 +53,12 @@
             const schema = {
               "@context": "https://schema.org",
               "@type": "ItemList",
-              "name": "Bernard Katiku Mutua Portfolio Projects",
+              "name": "Katiku Mutua Portfolio Projects",
               "url": baseUrl,
-              "description": "A collection of software projects developed by Bernard Katiku Mutua.",
+              "description": "A collection of software projects developed by Katiku Mutua.",
               "author": {
                 "@type": "Person",
-                "name": "Bernard Katiku Mutua",
+                "name": "Katiku Mutua",
                 "url": baseUrl
               },
               "itemListElement": projects.map((p, i) => ({

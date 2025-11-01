@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bernard Katiku Mutua — Full Stack Developer</title>
-  <meta name="description" content="Portfolio of Bernard Katiku Mutua — Full stack developer. Projects, skills, contact." />
+  <title>Katiku Mutua — Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Katiku Mutua — Full stack developer. Projects, skills, contact." />
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Bernard Katiku Mutua Portfolio">
-  <meta property="og:title" content="Bernard Katiku Mutua | Full Stack Developer">
-  <meta property="og:description" content="Portfolio of Bernard Katiku Mutua — Full Stack Developer skilled in Angular, Node.js, and modern web tools.">
+  <meta property="og:site_name" content="Ben Katiku Portfolio">
+  <meta property="og:title" content="Ben Katiku | Full Stack Developer">
+  <meta property="og:description" content="Portfolio of Katiku Mutua — Full Stack Developer skilled in Angular, Node.js, and modern web tools.">
   <meta property="og:image" content="assets/images/avatar.png">
-  <meta property="og:url" content="https://bernardkatikumutua.netlify.app">
+  <meta property="og:url" content="https://benkatiku.netlify.app">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bernard Katiku Mutua | Full Stack Developer">
+  <meta name="twitter:title" content="Ben Katiku | Full Stack Developer">
   <meta name="twitter:description" content="Building scalable apps, tools, and video games.">
   <meta name="twitter:image" content="assets/images/avatar.png">
 
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/icons/favicon.png" />
+
   <!-- AngularJS and ngRoute -->
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
@@ -29,6 +32,7 @@
   <script src="services/seo.service.js"></script>
   <script src="controllers/main.controller.js"></script>
   <script src="controllers/binary-canvas.controller.js"></script>
+  <script src="controllers/puzzle-canvas.controller.js"></script>
   <script src="controllers/project-detail.controller.js"></script>
   <script src="services/projects.service.js"></script>
   <script src="services/schema.service.js"></script>
@@ -38,7 +42,7 @@
   <header class="site-header" auto-hide-header>
     <div class="container header-grid">
       <div class="brand">
-        <img src="assets/images/avatar.jpg" alt="Bernard avatar" class="avatar" />
+        <img src="assets/images/avatar.jpg" alt="Katiku Mutua avatar" class="avatar" />
         <div>
           <h1>Ben K. M.</h1>
           <p class="muted">Full Stack Developer — JavaScript • Node • Angular • Python • PHP • SQL</p>
@@ -274,17 +278,28 @@
       <p>I am a passionate Full Stack Developer focused on building scalable web applications and developer tools that enhance both performance and usability. I thrive on improving the developer experience through efficient workflows, automation, and clean, maintainable code. My approach blends creativity with precision — designing user interfaces that feel fast, intuitive, and predictable, while ensuring robust backend systems that scale effortlessly. I also enjoy turning complex problems into seamless, impactful digital experiences.</p>
       <h3>Education & Certifications</h3>
       <ul>
-        <li>BSc Computer Science - University of Nairobi</li>
-        <li>Certs: Full-Stack Developer - freeCodeCamp</li>
+        <li>BSc. Computer Science - <a href="https://www.uonbi.ac.ke" target="_blank">University of Nairobi</a></li>
+        <li><a href="#!/about">Full Stack Developer - freeCodeCamp</a></li>
       </ul>
 
       <h3>How I work</h3>
       <p>My development process is built around a <strong>test-driven approach</strong>, where each feature is validated through clear, automated tests to ensure stability and long-term maintainability. By writing tests first, I can confidently refactor code and deliver robust, high-quality solutions. This discipline helps prevent regressions, encourages clean architecture, and keeps projects adaptable to new features or technologies without sacrificing reliability.<br><br>
 
-        I also believe in <strong>small, iterative releases</strong> that promote agility and continuous improvement. Delivering in smaller cycles allows for quick feedback loops and better alignment with product goals. Collaboration is key — I work closely with <strong>designers and product owners</strong> to translate ideas into practical, user-focused experiences, ensuring that every release reflects both technical excellence and a strong understanding of user needs.
-        
+        <strong>I believe in small, iterative releases</strong> that promote <em>agility and continuous improvement</em>. Delivering in smaller cycles allows for quick feedback loops and better alignment with product goals. Collaboration is key — <strong>I work closely with designers and product owners</strong> to translate ideas into <em>practical, user-focused experiences</em>, ensuring that every release reflects both technical excellence and a strong understanding of user needs.        
       </p>
     </section>
+
+    <section class="puzzle-section">
+      
+        <h3>My interests</h3>
+        <p>Apart from web development, I also enjoy playing and creating games. This allows me to practice general algorithm and data structure design, code optimization, and AI function and agent design. The following puzzle is made using JavaScript controlling a canvas element. JavaScript controls keyboard/mouse interactions as well as the animation.</p>
+     
+      <!-- Canvas Container Left -->
+      <div class="puzzle-canvas">
+        <canvas id="puzzleCanvas" height="480" puzzle-canvas></canvas>        
+      </div>
+    </section>
+    
   </script>
 
   <script type="text/ng-template" id="contact.html">
@@ -362,31 +377,31 @@
     })();
   </script>
 
-<script>
-  (function(){
-    const progressBar = document.getElementById('scrollProgress');
+  <script>
+    (function(){
+      const progressBar = document.getElementById('scrollProgress');
 
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (scrollTop / scrollHeight) * 100;
-      progressBar.style.width = scrolled + '%';
-    });
-  })();
-</script>
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+      });
+    })();
+  </script>
 
-<button id="backToTop" class="back-to-top" ng-click="main.scrollToTop()">
-  <img src="assets/icons/up-arrow.svg" alt="Back to top" />
-</button>
+  <button id="backToTop" class="back-to-top" ng-click="main.scrollToTop()">
+    <img src="assets/icons/up-arrow.svg" alt="Back to top" />
+  </button>
 
-<!-- WhatsApp Chat Button -->
-<a href="https://wa.me/254708793131" 
-   class="whatsapp-float" 
-   target="_blank" 
-   rel="noopener" 
-   aria-label="Chat on WhatsApp">
-  <img src="assets/icons/whatsapp-icon.svg" alt="WhatsApp Chat" />
-</a>
+  <!-- WhatsApp Chat Button -->
+  <a href="https://wa.me/254708793131" 
+    class="whatsapp-float" 
+    target="_blank" 
+    rel="noopener" 
+    aria-label="Chat on WhatsApp">
+    <img src="assets/icons/whatsapp-icon.svg" alt="WhatsApp Chat" />
+  </a>
 
 </body>
 </html>

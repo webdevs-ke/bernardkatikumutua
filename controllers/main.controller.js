@@ -6,9 +6,9 @@
         // Default SEO when landing on home
         SeoDefaults();
         function SeoDefaults(){
-            document.title = 'Bernard Katiku Mutua | Full Stack Developer Portfolio';
+            document.title = 'Katiku Mutua | Full Stack Developer';
             var meta = document.querySelector('meta[name="description"]');
-            if(meta) meta.setAttribute('content', 'Portfolio of Bernard Katiku Mutua — Full Stack Developer skilled in Angular, Node.js, and modern web development.');
+            if(meta) meta.setAttribute('content', 'Portfolio of Katiku Mutua, Full Stack Developer in Nairobi, web developer in Nairobi, web development in Kenya, HTML & CSS expert, Angular, Node.js, and modern web development in Kenya.');
         }
 
         vm.year = new Date().getFullYear();

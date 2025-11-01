@@ -54,7 +54,7 @@ a:active {
   left: 0;
   width: 100%;              /* full width */
   background:var(--card); /* subtle transparency */
-  background: rgba(20, 20, 30, 0.05); /* translucent */
+  background: rgba(20, 20, 30, 0.1); /* translucent */
   z-index: 1000;            /* ensure it stays above content */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px); /* adds a modern frosted-glass effect */
@@ -888,4 +888,48 @@ footer .social-links img:hover {
 .back-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+/* -------------------------------------- */
+
+.puzzle-section {
+  display: block;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 10px 0px;
+  background: var(--background);
+  color: var(--text);
+}
+
+
+.puzzle-canvas {
+  flex: 1 1 40%;
+  min-width: 300px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#puzzleCanvas {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: radial-gradient(circle at center, #002b36 10%, #001b22 90%);
+  box-shadow: 0 0 25px rgba(0, 188, 212, 0.2);
+  filter: drop-shadow(0 0 6px #ffd700) brightness(1.1);
+}
+
+/* Responsive: stack vertically on mobile */
+@media (max-width: 768px) {
+  .puzzle-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .puzzle-canvas {
+    margin-top: 1.5rem;
+  }
 }
