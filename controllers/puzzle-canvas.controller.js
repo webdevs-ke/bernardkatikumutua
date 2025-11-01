@@ -280,7 +280,7 @@ const ROOM_WIDTH = 100, ROOM_HEIGHT = 100;
 
                 ctx.fillStyle = GOLD;
                 ctx.font = "14px cursive, monospace";
-                ctx.fillText ("click a tile & move", canvas.width/2+107, 50 );
+                ctx.fillText ("click  tile & move", canvas.width/2+107, 50 );
                 ctx.fillStyle = TEAL;
                 ctx.fillText ("left, up, right, down", canvas.width/2+107, 70 );
                 ctx.fillStyle = GOLD;
