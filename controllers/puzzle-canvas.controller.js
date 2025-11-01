@@ -280,7 +280,7 @@ const ROOM_WIDTH = 100, ROOM_HEIGHT = 100;
 
                 ctx.fillStyle = GOLD;
                 ctx.font = "14px cursive, monospace";
-                ctx.fillText ("click  tile & move", canvas.width/2+107, 50 );
+                ctx.fillText ("click a tile & move", canvas.width/2+107, 50 );
                 ctx.fillStyle = TEAL;
                 ctx.fillText ("left, up, right, down", canvas.width/2+107, 70 );
                 ctx.fillStyle = GOLD;
@@ -472,37 +472,149 @@ class Grid {
     }
 }
 
-
-    
-
-
-    
-
-    
-
-    
-
-
-    
-
-          
-
-    
-
-    
-
-    
-
-//     }
-
-
-
-
-
-//     /* ------------------------------------------------------------------- */
-//     /* ------------------------------------------------------------------- */
-
-    
-        
-//     }
-//     /* ------------------------------------------------------------------- */
+/**
+ * 15-Puzzle (4x4) Solver using IDA* Search
+ * Goal: [0, 1, 2, 3, ..., 15]
+ * Empty tile (0) is first.
+ */
+ class NPuzzleSolver {
+    constructor(size = 4) {
+      this.size = size;
+      this.goal = Array.from({ length: size * size }, (_, i) => i);
+      this.moves = [
+        { dir: 'U', delta: -size },
+        { dir: 'D', delta: size },
+        { dir: 'L', delta: -1 },
+        { dir: 'R', delta: 1 },
+      ];
+    }
+  
+    /** Manhattan distance heuristic */
+    manhattan(state) {
+      const n = this.size;
+      let sum = 0;
+      for (let i = 0; i < state.length; i++) {
+        const val = state[i];
+        if (val === 0) continue;
+        const goalIndex = val;
+        const gx = Math.floor(goalIndex / n);
+        const gy = goalIndex % n;
+        const x = Math.floor(i / n);
+        const y = i % n;
+        sum += Math.abs(x - gx) + Math.abs(y - gy);
+      }
+      return sum;
+    }
+  
+    /** Solvability check (for 4x4 board with 0-first goal) */
+    isSolvable(state) {
+      const n = this.size;
+      const arr = state.filter((x) => x !== 0);
+      let inv = 0;
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[i] > arr[j]) inv++;
+        }
+      }
+      const blankRowFromBottom = n - Math.floor(state.indexOf(0) / n);
+      if (n % 2 === 1) return inv % 2 === 0;
+      return (inv + blankRowFromBottom) % 2 === 1;
+    }
+  
+    /** Run IDA* and return solution string (e.g., "URDL") */
+    solve(start) {
+      if (!this.isSolvable(start)) {
+        throw new Error("Puzzle is unsolvable.");
+      }
+  
+      const bound = { value: this.manhattan(start) };
+      const path = [];
+      let nodesExpanded = 0;
+  
+      const dfs = (state, g, prevMove, limit) => {
+        nodesExpanded++;
+        const h = this.manhattan(state);
+        const f = g + h;
+  
+        if (f > limit) return f;
+        if (this.isGoal(state)) return true;
+  
+        let min = Infinity;
+        const zeroIdx = state.indexOf(0);
+        const x = Math.floor(zeroIdx / this.size);
+        const y = zeroIdx % this.size;
+  
+        for (const { dir, delta } of this.moves) {
+          // avoid immediate backtracking
+          if (
+            (dir === 'U' && prevMove === 'D') ||
+            (dir === 'D' && prevMove === 'U') ||
+            (dir === 'L' && prevMove === 'R') ||
+            (dir === 'R' && prevMove === 'L')
+          ) continue;
+  
+          // skip invalid edges
+          if (dir === 'L' && y === 0) continue;
+          if (dir === 'R' && y === this.size - 1) continue;
+          if (dir === 'U' && x === 0) continue;
+          if (dir === 'D' && x === this.size - 1) continue;
+  
+          const ni = zeroIdx + delta;
+          const next = state.slice();
+          [next[zeroIdx], next[ni]] = [next[ni], next[zeroIdx]];
+  
+          path.push(dir);
+          const t = dfs(next, g + 1, dir, limit);
+          if (t === true) return true;
+          if (t < min) min = t;
+          path.pop();
+        }
+        return min;
+      };
+  
+      let limit = bound.value;
+      while (true) {
+        const result = dfs(start, 0, null, limit);
+        if (result === true) {
+          return {
+            moves: path.join(''),
+            length: path.length,
+            nodesExpanded,
+          };
+        }
+        if (result === Infinity) {
+          return null; // no solution found
+        }
+        limit = result;
+      }
+    }
+  
+    /** Check if a state is the goal */
+    isGoal(state) {
+      for (let i = 0; i < this.goal.length; i++) {
+        if (state[i] !== this.goal[i]) return false;
+      }
+      return true;
+    }
+  }
+  
+  /* Example usage */
+//   const solver = new NPuzzleSolver();
+//   const start = [
+//     0, 1, 2, 3,
+//     4, 5, 6, 7,
+//     8, 9, 10, 11,
+//     12, 13, 15, 14
+//   ];
+  
+//   console.time("IDA*");
+//   try {
+//     const result = solver.solve(start);
+//     console.timeEnd("IDA*");
+//     console.log("Moves:", result.moves);
+//     console.log("Length:", result.length);
+//     console.log("Nodes expanded:", result.nodesExpanded);
+//   } catch (e) {
+//     console.error(e.message);
+//   }
+  
