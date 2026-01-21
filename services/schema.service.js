@@ -25,9 +25,9 @@
                 "https://www.linkedin.com/in/katiku-mutua/"
               ],
               "knowsAbout": [
-                "AngularJS", "Node.js", "JavaScript", "Unity", "Computer Vision", "AI Training Data", "PHP", "SQL", "Python"
+                "AngularJS", "Node.js", "JavaScript", "Unity", "Computer Vision", "AI Training Data", "PHP", "SQL", "Python", "TypeScript"
               ],
-              "description": "Full Stack Developer experienced in Angular, Node.js, PHP, SQL and AI-based applications."
+              "description": "Full Stack Developer experienced in Angular, Node.js, TypeScript, PHP, SQL and AI-based applications."
             };
             addSchema(schema);
           },
